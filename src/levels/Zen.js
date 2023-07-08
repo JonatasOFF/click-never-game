@@ -4,16 +4,15 @@ import { BaseTexture, Container, Point, Sprite, Spritesheet } from "pixi.js";
 import { Clicker } from "../objects/Clicker";
 import { Combo } from "../objects/Combo";
 import { Enemy } from "../objects/Enemy";
-import { Power } from "../powers/Power";
-import { Background } from "../objects/Background";
 import { Speed } from "../powers/Speed";
+import { Background } from "../objects/Background";
 import { randomNumber } from "../utils/randomNumber";
 import { setCursorScreen } from "../utils/setCursorScreen";
 
 export class Zen {
   constructor(app) {
     this.app = app;
-    setCursorScreen(false)
+    setCursorScreen(false);
     this.createWorld();
   }
 
@@ -21,7 +20,7 @@ export class Zen {
     this.bg = new Background().bg;
     this.secondary.addChild(this.bg);
     this.secondary.addChild(this.combo.text);
-    this.secondary.addChild(this.speedPower.sprite);
+    this.secondary.addChild(this.speed.powerDisplay);
   }
 
   createClicker() {
@@ -58,16 +57,18 @@ export class Zen {
     this.isSpawnEnemys = true;
     this.globalDy = 1;
 
-    const power = new Power(this.app, this);
-    const speedPower = new Speed(12, window.innerHeight - 76, power);
+    const speed = new Speed(this.app, this, {
+      x: 12,
+      y: window.innerHeight - 76,
+    });
+
     const combo = new Combo();
     const clicker = new Clicker(this.app, this);
     const timerSpawnEnemy = new Timer(400);
     timerSpawnEnemy.loop = true;
 
     this.combo = combo;
-    this.power = power;
-    this.speedPower = speedPower;
+    this.speed = speed;
     this.clicker = clicker;
     this.combo.text.x = 32;
 
@@ -76,7 +77,7 @@ export class Zen {
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "1") {
-        this.power.slowTime();
+        this.speed.slowTime();
       }
 
       if (e.key === "2") {
