@@ -6,5 +6,4 @@ export const Config = {
   manifest,
   startScene: Menu,
   modeZen: Zen,
-
 };

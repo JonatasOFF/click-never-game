@@ -47,12 +47,11 @@ export class Enemy {
   }
 
   buildBody() {
-    const body = new PIXI.Graphics();
-
+    const body = new PIXI.Sprite(PIXI.Assets.get("enemy1"));
+    body.width = this.width;
+    body.height = this.height;
     body.interactive = true;
     body.position = new PIXI.Point(this.x, this.y);
-    body.beginFill();
-    body.drawRect(0, 0, this.width, this.height);
 
     body.on("pointerup", (e) => this.missClick());
 
@@ -79,14 +78,10 @@ export class Enemy {
     );
 
     weakness.interactive = true;
-    weakness.beginFill(0xffffff);
-    weakness.drawRoundedRect(
-      randomPosition.x,
-      randomPosition.y,
-      this.width / 2,
-      this.height / 2,
-      25
-    );
+
+    weakness.beginFill(0xff9900, 0.1);
+    weakness.drawRect(10, 10, this.width , this.height);
+
     weakness.on("pointerup", (e) => this.receiveDamage());
 
     this.weakness = weakness;
