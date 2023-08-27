@@ -18,13 +18,19 @@ export class Zen {
 
   createBackground() {
     this.bg = new Background().bg;
+    this.bg.zIndex = 9;
+    this.combo.text.zIndex = 9999;
+    this.speed.powerDisplay.zIndex = 9999;
     this.secondary.addChild(this.bg);
     this.secondary.addChild(this.combo.text);
     this.secondary.addChild(this.speed.powerDisplay);
+    this.secondary.sortChildren();
   }
 
   createClicker() {
+    this.clicker.clickerSprite.zIndex = 999
     this.container.addChild(this.clicker.clickerSprite);
+    this.container.sortChildren()
   }
 
   createSpawnEnemy() {
@@ -41,16 +47,19 @@ export class Zen {
     );
 
     this.enemys.push(enemy);
+    enemy.body.zIndex = 999
+    enemy.positionExplosion.zIndex = 9
     this.secondary.addChild(enemy.body);
     this.secondary.addChild(enemy.positionExplosion);
+    this.secondary.sortChildren()
   }
 
   createWorld() {
     this.container = new Container();
     this.secondary = new Container();
+    this.container.addChild(this.secondary);
     this.container.sortChildren();
     this.secondary.sortChildren();
-    this.container.addChild(this.secondary);
 
     this.enemys = [];
     this.life = 3;

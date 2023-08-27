@@ -14,9 +14,10 @@ export class Menu {
     button.onPress.connect(() => {
       this.modeZen();
     });
-
+    button.view.zIndex = 999
     this.container.addChild(button.view);
     this.app = app;
+    this.container.sortChildren()
     this.app.stage.addChild(this.container);
   }
 

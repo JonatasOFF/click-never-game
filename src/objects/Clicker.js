@@ -90,6 +90,7 @@ export class Clicker {
         { type: "textureSingle", config: { texture: Assets.get("clicker") } },
       ],
     });
+    
 
     const speedTimer = new Timer(100);
     this.speedTimer = speedTimer;
